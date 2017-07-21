@@ -32,7 +32,7 @@ public class UserRestful {
     @ApiOperation(value = "用户登录", nickname = "用户登录")
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     public UserOperationDto login(@RequestBody UserLoginParam userLoginParam) throws Exception {
-        int a = 1;
+
         return userService.login(userLoginParam);
     }
 
