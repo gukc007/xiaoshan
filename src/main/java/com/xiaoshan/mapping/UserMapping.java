@@ -1,6 +1,7 @@
 package com.xiaoshan.mapping;
 
 import com.google.common.collect.Lists;
+import com.xiaoshan.common.helper.SecurityHelper;
 import com.xiaoshan.datacontract.response.OperationDto;
 import com.xiaoshan.datacontract.response.UserOperationDto;
 import com.xiaoshan.datacontract.request.UserParamDto;
@@ -28,7 +29,8 @@ public class UserMapping {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setAccount(entity.getAccount());
-        dto.setPassword(entity.getPassword());
+        dto.setToken(SecurityHelper.getToken(entity.getAccount(), entity.getPassword()));
+
         return dto;
     }
 

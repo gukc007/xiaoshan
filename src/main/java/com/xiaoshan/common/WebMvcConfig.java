@@ -2,6 +2,7 @@ package com.xiaoshan.common;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
@@ -13,5 +14,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Bean
     public AuthFunctionInterceptor getAuthFunctionInterceptor() {
         return new AuthFunctionInterceptor();
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(getAuthFunctionInterceptor());
     }
 }

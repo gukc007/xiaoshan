@@ -1,6 +1,6 @@
 package com.xiaoshan.service;
 
-import com.xiaoshan.datacontract.response.UserOperationDto;
+
 import com.xiaoshan.datacontract.request.UserParamDto;
 import com.xiaoshan.datacontract.request.UserLoginParam;
 import com.xiaoshan.datacontract.response.UserResponse;
@@ -11,7 +11,7 @@ import com.xiaoshan.datacontract.response.UserResponse;
 public interface UserService {
     Long addUser(UserParamDto userParamDto) throws Exception;
 
-    UserOperationDto login(UserLoginParam userLoginParam) throws Exception;
+    UserResponse login(UserLoginParam userLoginParam) throws Exception;
 
     UserResponse verfiyUser(String token) throws Exception;
 }

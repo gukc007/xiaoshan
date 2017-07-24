@@ -3,10 +3,8 @@ package com.xiaoshan.service.impl;
 import com.google.common.collect.Lists;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.xiaoshan.common.BusinessExceptionBase;
-import com.xiaoshan.common.helper.CurrentRequestHelper;
 import com.xiaoshan.common.helper.SecurityHelper;
 import com.xiaoshan.dal.UserRepository;
-import com.xiaoshan.datacontract.response.UserOperationDto;
 import com.xiaoshan.datacontract.request.UserParamDto;
 import com.xiaoshan.datacontract.request.UserLoginParam;
 import com.xiaoshan.datacontract.response.UserResponse;
@@ -54,19 +52,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserOperationDto login(UserLoginParam userLoginParam) throws Exception {
+    public UserResponse login(UserLoginParam userLoginParam) throws Exception {
         QUserEntity qUserEntity = QUserEntity.userEntity;
         if (jpaQueryFactory.selectFrom(qUserEntity)
                 .where(qUserEntity.account.eq(userLoginParam.getAccount())).fetchCount() <= 0) {
             throw new BusinessExceptionBase(BusinessExceptionBase.EnumExceptionType.UserNotExist);
         }
+        String password = SecurityHelper.md5(userLoginParam.getPassword());
         UserEntity userEntity = jpaQueryFactory.selectFrom(qUserEntity)
                 .where(qUserEntity.account.eq(userLoginParam.getAccount())
-                .and(qUserEntity.password.eq(userLoginParam.getPassword()))).fetchOne();
+                        .and(qUserEntity.password.eq(password))).fetchOne();
         if (userEntity == null) {
             throw new BusinessExceptionBase(BusinessExceptionBase.EnumExceptionType.UserNameOrPasswordError);
         }
-        return UserMapping.toUserOperationDto(userEntity);
+        return UserMapping.toUserResponse(userEntity);
     }
 
     @Override

@@ -43,7 +43,6 @@ public class AuthenticationFilter extends OncePerRequestFilter implements Filter
                 UserResponse user = userService.verfiyUser(authorization);
                 dto.setId(user.getId());
                 dto.setAccount(user.getAccount());
-                dto.setPassword(user.getPassword());
             } catch (Exception e) {
                 response.sendError(401, "token失效,请求地址:" + request.getRequestURI());
                 return;

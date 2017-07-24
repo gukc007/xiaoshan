@@ -33,7 +33,11 @@ public class SecurityHelper {
         }
     }
 
-    public static String[] getUserNameAndPassword(String token){
+    public static String[] getUserNameAndPassword(String token) {
         return token.split(":");
+    }
+
+    public static String getToken(String account, String password) {
+        return account + ":" + password;
     }
 }

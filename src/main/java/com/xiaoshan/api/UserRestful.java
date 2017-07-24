@@ -4,6 +4,7 @@ import com.xiaoshan.common.AllowAnonymous;
 import com.xiaoshan.datacontract.response.UserOperationDto;
 import com.xiaoshan.datacontract.request.UserParamDto;
 import com.xiaoshan.datacontract.request.UserLoginParam;
+import com.xiaoshan.datacontract.response.UserResponse;
 import com.xiaoshan.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +32,7 @@ public class UserRestful {
     @AllowAnonymous
     @ApiOperation(value = "用户登录", nickname = "用户登录")
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public UserOperationDto login(@RequestBody UserLoginParam userLoginParam) throws Exception {
+    public UserResponse login(@RequestBody UserLoginParam userLoginParam) throws Exception {
 
         return userService.login(userLoginParam);
     }

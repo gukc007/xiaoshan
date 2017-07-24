@@ -3,6 +3,7 @@ package com.xiaoshan.service.impl;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.xiaoshan.common.helper.SecurityHelper;
 import com.xiaoshan.dal.OperationRepository;
 import com.xiaoshan.dal.UserRepository;
 import com.xiaoshan.domain.*;
@@ -54,7 +55,7 @@ public class InitializationServiceImpl implements InitializationService{
             admin.setId(1L);
             admin.setName("管理员");
             admin.setAccount("admin");
-            admin.setPassword("admin");
+            admin.setPassword(SecurityHelper.md5("admin"));
             Set<OperationEntity> operations = Sets.newHashSet(jpaQueryFactory.selectFrom(qOperationEntity).fetch());
             admin.setOperations(operations);
             userRepository.save(admin);
