@@ -41,7 +41,7 @@ public class CurrentRequestHelper extends AbstractAuthenticationToken{
     }
 
     public static RequestUserDto getCurrentUser() throws Exception{
-        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
             return null;
         } else {
             return (RequestUserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

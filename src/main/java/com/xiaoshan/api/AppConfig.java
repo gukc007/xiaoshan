@@ -92,6 +92,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter{
 //				.antMatchers("/swagger-ui.html", "/").
     }
 
+    @Bean
     public AuthenticationFilter getMyFilter(){
         return new AuthenticationFilter();
     }
